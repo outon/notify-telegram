@@ -121,8 +121,36 @@ If you want to notify a *`service`* event you should include, at least the follo
 
 Finally you have to configure your Nagios:
 
+You have two options: Reuse a variable, usually `pager`, or create your [custom variable macro](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/customobjectvars.html).
+
+#### Update your contacts
+You must include in your contact information the User/Group ID.
+
+If you decided to user the existing `pager` field to store you User/Group ID or create your *custom object variable*
+    
+    define contact {
+        contact_name                    nagios telegram bot
+        pager                           <user_id|group_id>
+        service_notification_commands   notify-service-by-telegram
+        host_notification_commands      notify-host-by-telegram
+    }
+
+If you decided to create your custom variable macro:
+    
+    define contact {
+        contact_name                    nagios telegram bot
+        _telegram                       <user_id|group_id>
+        service_notification_commands   notify-service-by-telegram
+        host_notification_commands      notify-host-by-telegram
+    }
+
+
 #### Define new commands
-You must define new commands to send notification by Telegram 
+You must define new commands to send notification by Telegram.
+
+If you are reusing the `PAGER` variable you should use the macro **\$CONTACTPAGER\$**.
+
+If you decided to create your custom variable then you should use the macro **\$_CONTACTTELEGRAM\$**.
  
     define command {
         command_name    notify-host-by-telegram
@@ -137,17 +165,6 @@ You must define new commands to send notification by Telegram
             --object_type service --contact "$CONTACTPAGER$" --notificationtype "$NOTIFICATIONTYPE$" \ 
             --servicestate "$SERVICESTATE$" --hostname "$HOSTNAME$" --servicedesc "$SERVICEDESC$" --output "$SERVICEOUTPUT$"
 
-#### Update your contacts
-You must include in your contact information the User/Group ID.
-
-You can use the existing `pager` field to store you User/Group ID or create your [custom object variable](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/customobjectvars.html) 
-    
-    define contact {
-        contact_name                    nagios telegram bot
-        pager                           <user_id|group_id>
-        service_notification_commands   notify-service-by-telegram
-        host_notification_commands      notify-host-by-telegram
-    }
 
 ##Enjoy!
 
