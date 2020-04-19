@@ -1,12 +1,14 @@
 # **notify-telegram.py**
- **notify-telegram.py** - python script for sending Nagios/Centreon notifications using a Telegram
+ **notify-telegram.py** - script python para enviar notificaciones de Nagios/Centreon usando un bot de Telegram.
+ 
+ * Para instrucciones en español consulte [README_es.md](./README_es.md)
+ 
+  **notify-telegram.py** - python script for sending Nagios/Centreon notifications using a Telegram
     bot. 
 
 This script will send a notification to Telegram
 
 This script can run on Python 3.6 and above.
-
-
 
 ## Requeriments:
 
@@ -166,7 +168,7 @@ If you decided to create your custom variable then you should use the macro **\$
             --servicestate "$SERVICESTATE$" --hostname "$HOSTNAME$" --servicedesc "$SERVICEDESC$" --output "$SERVICEOUTPUT$"
 
 
-##Enjoy!
+## Enjoy!
 
 ## License
 This scripts and related material is distributed under [MIT License](./LICENSE.txt)
